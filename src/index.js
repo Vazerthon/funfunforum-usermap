@@ -1,5 +1,4 @@
-import '../node_modules/leaflet/dist/leaflet.css';
-import { initMap } from './user-map';
+import { initMap, addMarker } from './user-map';
 
 const initDom = (hostId) => {
   const mapHost = document.createElement('div');
@@ -19,3 +18,7 @@ const initDom = (hostId) => {
 
 initDom('mapHost');
 initMap('mapHost');
+
+[{ lat: 55.9485, lng: -3.2, content: "Just chillin' at Edinburgh Castle" }].map(marker =>
+  addMarker(marker),
+);
