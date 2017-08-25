@@ -1,1 +1,0 @@
-alert('hello fun fun forum map!');
