@@ -12,7 +12,9 @@ const defaultIcon = icon({
   iconRetinaUrl: markerIcon2x,
   iconUrl: markerIcon,
   shadowUrl: markerShadow,
-  popupAnchor: [12, -2],
+  popupAnchor: [0, -38],
+  iconSize: [24, 36],
+  iconAnchor: [12, 36],
 });
 
 export const initMap = (hostId) => {
@@ -21,7 +23,7 @@ export const initMap = (hostId) => {
   const tiles = tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
     minZoom: 3,
-    maxZoom: 14,
+    maxZoom: 18,
   });
 
   userMap.setView([55.942, -3.21], 3);
