@@ -1,18 +1,4 @@
-import { map, tileLayer } from 'leaflet';
-import '../node_modules/leaflet/dist/leaflet.css';
-
-const initMap = (hostId) => {
-  const userMap = map(hostId);
-
-  const tiles = tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-    minZoom: 8,
-    maxZoom: 12,
-  });
-
-  userMap.setView([51.505, -0.09], 13);
-  userMap.addLayer(tiles);
-};
+import { initMap, addMarker } from './user-map';
 
 const initDom = (hostId) => {
   const mapHost = document.createElement('div');
@@ -32,3 +18,8 @@ const initDom = (hostId) => {
 
 initDom('mapHost');
 initMap('mapHost');
+
+[
+  { lat: 55.9485, lng: -3.2, content: "Just chillin' at Edinburgh Castle" },
+  { lat: 51.508, lng: -0.128, content: "Hangin' at Trafalgar Square" },
+].map(marker => addMarker(marker));
