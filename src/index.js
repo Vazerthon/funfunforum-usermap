@@ -19,6 +19,7 @@ const initDom = (hostId) => {
 initDom('mapHost');
 initMap('mapHost');
 
-[{ lat: 55.9485, lng: -3.2, content: "Just chillin' at Edinburgh Castle" }].map(marker =>
-  addMarker(marker),
-);
+[
+  { lat: 55.9485, lng: -3.2, content: "Just chillin' at Edinburgh Castle" },
+  { lat: 51.508, lng: -0.128, content: "Hangin' at Trafalgar Square" },
+].map(marker => addMarker(marker));

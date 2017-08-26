@@ -20,11 +20,11 @@ export const initMap = (hostId) => {
 
   const tiles = tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-    minZoom: 4,
-    maxZoom: 20,
+    minZoom: 3,
+    maxZoom: 14,
   });
 
-  userMap.setView([55.942, -3.21], 13);
+  userMap.setView([55.942, -3.21], 3);
   userMap.addLayer(tiles);
 };
 
