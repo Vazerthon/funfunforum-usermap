@@ -1,8 +1,8 @@
 import { map, tileLayer, marker, icon } from 'leaflet';
-import '../node_modules/leaflet/dist/leaflet.css';
-import markerIcon2x from '../node_modules/leaflet/dist/images/marker-icon-2x.png';
-import markerIcon from '../node_modules/leaflet/dist/images/marker-icon.png';
-import markerShadow from '../node_modules/leaflet/dist/images/marker-shadow.png';
+import '../../node_modules/leaflet/dist/leaflet.css';
+import markerIcon2x from '../../node_modules/leaflet/dist/images/marker-icon-2x.png';
+import markerIcon from '../../node_modules/leaflet/dist/images/marker-icon.png';
+import markerShadow from '../../node_modules/leaflet/dist/images/marker-shadow.png';
 
 let userMap;
 
@@ -30,7 +30,7 @@ export const initMap = (hostId) => {
   userMap.addLayer(tiles);
 };
 
-export const addMarker = ({ lat, lng, content }) => {
+export const addMapMarker = ({ lat, lng, caption }) => {
   const mark = marker([lat, lng], { icon: defaultIcon }).addTo(userMap);
-  mark.bindPopup(content).openPopup();
+  mark.bindPopup(caption).openPopup();
 };

@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
   entry: './src/index.js',
@@ -10,9 +11,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Fun Fun Forum - User Map',
     }),
-
-    // TODO will probably need this eventually
-    // new webpack.ProvidePlugin({fetch:'isomorphic-fetch'})
+    new webpack.ProvidePlugin({ fetch: 'isomorphic-fetch' }),
   ],
   devtool: 'source-map',
   module: {
