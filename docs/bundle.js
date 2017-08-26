@@ -591,7 +591,7 @@ const initMap = (hostId) => {
   userMap = Object(__WEBPACK_IMPORTED_MODULE_0_leaflet__["map"])(hostId);
 
   const tiles = Object(__WEBPACK_IMPORTED_MODULE_0_leaflet__["tileLayer"])('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+    attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
     minZoom: 3,
     maxZoom: 18,
   });
@@ -14397,7 +14397,7 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAQAAAAC
 /* WEBPACK VAR INJECTION */(function(fetch) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__schema___ = __webpack_require__(17);
 
 
-const fetchForumData = () => fetch('http://ffforumautomator.herokuapp.com/hackable-data');
+const fetchForumData = () => fetch('https://ffforumautomator.herokuapp.com/hackable-data');
 /* harmony export (immutable) */ __webpack_exports__["b"] = fetchForumData;
 
 
@@ -24185,7 +24185,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "body {\n  margin: 0;\n}\n", ""]);
+exports.push([module.i, "body {\r\n  margin: 0;\r\n}\r\n", ""]);
 
 // exports
 

@@ -1,6 +1,6 @@
 import { isValidUserData } from '../schema/';
 
-export const fetchForumData = () => fetch('http://ffforumautomator.herokuapp.com/hackable-data');
+export const fetchForumData = () => fetch('https://ffforumautomator.herokuapp.com/hackable-data');
 
 const filterInvalidUserData = data => data.filter(isValidUserData);
 const mapUserToLocationData = user =>
