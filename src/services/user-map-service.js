@@ -21,7 +21,7 @@ export const initMap = (hostId) => {
   userMap = map(hostId);
 
   const tiles = tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+    attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
     minZoom: 3,
     maxZoom: 18,
   });
