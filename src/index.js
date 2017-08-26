@@ -5,8 +5,8 @@ renderMapHost('mapHost');
 initMap('mapHost');
 
 const addUserMarkers = async () => {
-  const userLocationResult = await fetchUserLocations();
-  userLocationResult.value.map(l => addMapMarker(l));
+  const userLocationData = await fetchUserLocations();
+  userLocationData.map(l => addMapMarker(l));
 };
 
 addUserMarkers();
