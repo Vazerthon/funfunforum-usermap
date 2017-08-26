@@ -6,10 +6,13 @@ import markerShadow from '../node_modules/leaflet/dist/images/marker-shadow.png'
 
 let userMap;
 
+// without this the default icon won't show
+// https://github.com/PaulLeCam/react-leaflet/issues/255
 const defaultIcon = icon({
   iconRetinaUrl: markerIcon2x,
   iconUrl: markerIcon,
   shadowUrl: markerShadow,
+  popupAnchor: [12, -2],
 });
 
 export const initMap = (hostId) => {
