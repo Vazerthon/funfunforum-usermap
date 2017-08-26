@@ -1,4 +1,4 @@
-import responseWrapper from './response-wrapper';
+import { responseWrapper } from '../models/';
 
 const fetchForumData = async () => {
   // const response = await fetch('http://ffforumautomator.herokuapp.com/hackable-data', {
@@ -35,9 +35,9 @@ const fetchForumData = async () => {
   return responseWrapper(true, mock);
 };
 
-const getUserLocations = async () => {
+const fetchUserLocations = async () => {
   const data = await fetchForumData();
   return data;
 };
 
-export default getUserLocations;
+export default fetchUserLocations;

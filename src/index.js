@@ -1,32 +1,15 @@
-import { initMap, addMarker } from './user-map';
-import getUserLocations from './forum-data-fetch-service';
+import { initMap, addMapMarker, fetchUserLocations, renderMapHost } from './services/';
 
-const initDom = (hostId) => {
-  const mapHost = document.createElement('div');
-  mapHost.id = hostId;
-
-  const style = `
-    border: 1px solid #000;
-    width: 800px;
-    height: 600px;
-    margin: 0 auto;
-  `;
-
-  mapHost.setAttribute('style', style);
-
-  document.body.appendChild(mapHost);
-};
-
-initDom('mapHost');
+renderMapHost('mapHost');
 initMap('mapHost');
 
 [
   { lat: 55.9485, lng: -3.2, content: "Just chillin' at Edinburgh Castle" },
   { lat: 51.508, lng: -0.128, content: "Hangin' at Trafalgar Square" },
-].map(marker => addMarker(marker));
+].map(marker => addMapMarker(marker));
 
 const addUserMarkers = async () => {
-  const x = await getUserLocations();
+  const x = await fetchUserLocations();
   console.log(JSON.stringify(x));
 };
 
