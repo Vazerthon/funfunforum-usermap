@@ -41,7 +41,6 @@ const fetchForumData = async () => {
 };
 
 const filterInvalidUserData = data => data.filter(isValidUserData);
-// const mapUserToLocationData = user => ({ username: user.username, ...user.usermap_location });
 const mapUserToLocationData = user =>
   Object.assign({}, { username: user.username }, user.hackable_json.usermap_location);
 
