@@ -25,7 +25,7 @@
   "dependencies": {
     "eslint": "^4.5.0",
     "isomorphic-fetch": "^2.2.1",
-    "joi": "^10.6.0",
+    "joi-browser": "^10.6.1",
     "leaflet": "^1.2.0"
   }
 }

@@ -30,7 +30,7 @@ export const initMap = (hostId) => {
   userMap.addLayer(tiles);
 };
 
-export const addMapMarker = ({ lat, lng, content }) => {
+export const addMapMarker = ({ lat, lng, caption }) => {
   const mark = marker([lat, lng], { icon: defaultIcon }).addTo(userMap);
-  mark.bindPopup(content).openPopup();
+  mark.bindPopup(caption).openPopup();
 };
