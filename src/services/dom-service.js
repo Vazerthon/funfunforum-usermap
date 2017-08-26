@@ -1,15 +1,15 @@
-export const renderMapHost = (hostId) => {
+const renderMapHost = (hostId) => {
   const mapHost = document.createElement('div');
   mapHost.id = hostId;
 
   const style = `
-    border: 1px solid #000;
-    width: 800px;
-    height: 600px;
-    margin: 0 auto;
+    width: 100vw;
+    height: 100vh;
   `;
 
   mapHost.setAttribute('style', style);
 
   document.body.appendChild(mapHost);
 };
+
+export default renderMapHost;
