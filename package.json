@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "eslint": "^4.5.0",
+    "isomorphic-fetch": "^2.2.1",
     "leaflet": "^1.2.0"
   }
 }
