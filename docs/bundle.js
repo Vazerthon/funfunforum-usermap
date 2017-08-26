@@ -132,7 +132,9 @@ const defaultIcon = Object(__WEBPACK_IMPORTED_MODULE_0_leaflet__["icon"])({
   iconRetinaUrl: __WEBPACK_IMPORTED_MODULE_2__node_modules_leaflet_dist_images_marker_icon_2x_png___default.a,
   iconUrl: __WEBPACK_IMPORTED_MODULE_3__node_modules_leaflet_dist_images_marker_icon_png___default.a,
   shadowUrl: __WEBPACK_IMPORTED_MODULE_4__node_modules_leaflet_dist_images_marker_shadow_png___default.a,
-  popupAnchor: [12, -2],
+  popupAnchor: [0, -38],
+  iconSize: [24, 36],
+  iconAnchor: [12, 36],
 });
 
 const initMap = (hostId) => {
@@ -141,7 +143,7 @@ const initMap = (hostId) => {
   const tiles = Object(__WEBPACK_IMPORTED_MODULE_0_leaflet__["tileLayer"])('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
     minZoom: 3,
-    maxZoom: 14,
+    maxZoom: 18,
   });
 
   userMap.setView([55.942, -3.21], 3);
