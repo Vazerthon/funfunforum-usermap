@@ -11,6 +11,9 @@ const appendChild = (elem, id, style, parent) => {
 
 const timedRemoveElement = (removeAfter, elem) => {
   setTimeout(() => {
+    if (!elem) {
+      return;
+    }
     elem.parentNode.removeChild(elem);
   }, removeAfter);
 };
@@ -24,7 +27,7 @@ export const renderMapHost = (hostId) => {
   appendChild('div', hostId, style);
 };
 
-export const showToast = (message, displayFor = 3000) => {
+export const showToast = (message, displayFor = 5000) => {
   const toastStyle = `
     width: 50vw;
     background: #444;
