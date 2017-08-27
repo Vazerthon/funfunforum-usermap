@@ -9559,7 +9559,7 @@ var addUserMarkers = function () {
               break;
             }
 
-            (0, _services.showToast)(forumDataResult.statusText);
+            (0, _services.showToast)('Problem loading forum data: ' + forumDataResult.statusText);
             return _context.abrupt('return');
 
           case 6:
@@ -9574,7 +9574,7 @@ var addUserMarkers = function () {
               break;
             }
 
-            (0, _services.showToast)('Forum data seems to be in the wrong format, we need an array');
+            (0, _services.showToast)('Problem loading forum data: expected an array');
             return _context.abrupt('return');
 
           case 12:
