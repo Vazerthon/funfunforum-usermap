@@ -9694,7 +9694,7 @@ var defaultIcon = (0, _leaflet.icon)({
 });
 
 var initMap = exports.initMap = function initMap(hostId) {
-  userMap = (0, _leaflet.map)(hostId);
+  userMap = (0, _leaflet.map)(hostId, { worldCopyJump: true });
 
   var tiles = (0, _leaflet.tileLayer)('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',

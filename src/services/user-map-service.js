@@ -18,7 +18,7 @@ const defaultIcon = icon({
 });
 
 export const initMap = (hostId) => {
-  userMap = map(hostId);
+  userMap = map(hostId, { worldCopyJump: true });
 
   const tiles = tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
