@@ -32,5 +32,5 @@ export const initMap = (hostId) => {
 
 export const addMapMarker = ({ lat, lng, caption }) => {
   const mark = marker([lat, lng], { icon: defaultIcon }).addTo(userMap);
-  mark.bindPopup(caption).openPopup();
+  mark.bindPopup(caption);
 };
