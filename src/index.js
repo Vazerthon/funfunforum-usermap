@@ -4,6 +4,7 @@ import {
   fetchForumData,
   extractUserLocations,
   renderMapHost,
+  showToast,
 } from './services/';
 import './styles.css';
 
@@ -25,3 +26,4 @@ const addUserMarkers = async () => {
 };
 
 addUserMarkers();
+showToast('hello toast');
