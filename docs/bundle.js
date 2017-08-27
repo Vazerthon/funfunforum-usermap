@@ -532,11 +532,23 @@ const htmlCaption = (username, caption) => `
 
 const addUserMarkers = async () => {
   const forumDataResult = await Object(__WEBPACK_IMPORTED_MODULE_0__services___["c" /* fetchForumData */])();
+  if (!forumDataResult.ok) {
+    Object(__WEBPACK_IMPORTED_MODULE_0__services___["f" /* showToast */])(forumDataResult.statusText);
+    return;
+  }
   const forumData = await forumDataResult.json();
+  if (!Array.isArray(forumData)) {
+    Object(__WEBPACK_IMPORTED_MODULE_0__services___["f" /* showToast */])('Forum data seems to be in the wrong format, we need an array');
+    return;
+  }
   const userLocationData = Object(__WEBPACK_IMPORTED_MODULE_0__services___["b" /* extractUserLocations */])(forumData);
   userLocationData
     .map(l => ({ lat: l.lat, lng: l.lng, caption: htmlCaption(l.username, l.caption) }))
     .map(l => Object(__WEBPACK_IMPORTED_MODULE_0__services___["a" /* addMapMarker */])(l));
+
+  Object(__WEBPACK_IMPORTED_MODULE_0__services___["f" /* showToast */])(
+    `Loaded forum data for ${forumData.length} users, ${userLocationData.length} of them have a location set`,
+  );
 };
 
 addUserMarkers();
@@ -554,7 +566,8 @@ addUserMarkers();
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__forum_data_fetch_service__["a"]; });
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_1__forum_data_fetch_service__["b"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__dom_service__ = __webpack_require__(20);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_2__dom_service__["a"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_2__dom_service__["a"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_2__dom_service__["b"]; });
 
 
 
@@ -24135,21 +24148,59 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-const renderMapHost = (hostId) => {
-  const mapHost = document.createElement('div');
-  mapHost.id = hostId;
+const appendChild = (elem, id, style, parent) => {
+  const element = document.createElement(elem);
+  element.id = id;
 
+  element.setAttribute('style', style);
+
+  const parentElem = parent || document.body;
+  parentElem.appendChild(element);
+  return element;
+};
+
+const timedRemoveElement = (removeAfter, elem) => {
+  setTimeout(() => {
+    if (!elem) {
+      return;
+    }
+    elem.parentNode.removeChild(elem);
+  }, removeAfter);
+};
+
+const renderMapHost = (hostId) => {
   const style = `
     width: 100vw;
     height: 100vh;
   `;
 
-  mapHost.setAttribute('style', style);
-
-  document.body.appendChild(mapHost);
+  appendChild('div', hostId, style);
 };
+/* harmony export (immutable) */ __webpack_exports__["a"] = renderMapHost;
 
-/* harmony default export */ __webpack_exports__["a"] = (renderMapHost);
+
+const showToast = (message, displayFor = 5000) => {
+  const toastStyle = `
+    width: 50vw;
+    background: #444;
+    color: #fff;
+    position: absolute;
+    top: 30%;
+    left: 25%;
+    z-index: 9999;
+    border-radius: 30px;
+    text-align: center;
+  `;
+
+  const toast = document.getElementById('toast') || appendChild('div', 'toast', toastStyle);
+  const toastMessage =
+    document.getElementById('toast-message') || appendChild('h3', 'toast-message', null, toast);
+  toastMessage.innerText = message;
+
+  timedRemoveElement(displayFor, toast);
+};
+/* harmony export (immutable) */ __webpack_exports__["b"] = showToast;
+
 
 
 /***/ }),

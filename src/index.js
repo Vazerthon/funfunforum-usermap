@@ -4,6 +4,7 @@ import {
   fetchForumData,
   extractUserLocations,
   renderMapHost,
+  showToast,
 } from './services/';
 import './styles.css';
 
@@ -17,11 +18,23 @@ const htmlCaption = (username, caption) => `
 
 const addUserMarkers = async () => {
   const forumDataResult = await fetchForumData();
+  if (!forumDataResult.ok) {
+    showToast(forumDataResult.statusText);
+    return;
+  }
   const forumData = await forumDataResult.json();
+  if (!Array.isArray(forumData)) {
+    showToast('Forum data seems to be in the wrong format, we need an array');
+    return;
+  }
   const userLocationData = extractUserLocations(forumData);
   userLocationData
     .map(l => ({ lat: l.lat, lng: l.lng, caption: htmlCaption(l.username, l.caption) }))
     .map(l => addMapMarker(l));
+
+  showToast(
+    `Loaded forum data for ${forumData.length} users, ${userLocationData.length} of them have a location set`,
+  );
 };
 
 addUserMarkers();
