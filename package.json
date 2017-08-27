@@ -11,6 +11,11 @@
     "start": "webpack-dev-server --progress --colors"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-runtime": "^6.26.0",
     "css-loader": "^0.28.5",
     "eslint-config-airbnb-base": "^11.3.2",
     "eslint-plugin-import": "^2.7.0",
