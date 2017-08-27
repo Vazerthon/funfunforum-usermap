@@ -16,6 +16,6 @@ export const userDataSchema = Joi.object().keys({
 });
 
 export const isValidUserData = (obj) => {
-  const { error } = Joi.validate(obj, userDataSchema);
+  const { error } = Joi.validate(obj, userDataSchema, { allowUnknown: true });
   return !error;
 };

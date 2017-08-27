@@ -14952,7 +14952,7 @@ const userDataSchema = __WEBPACK_IMPORTED_MODULE_0_joi_browser___default.a.objec
 
 
 const isValidUserData = (obj) => {
-  const { error } = __WEBPACK_IMPORTED_MODULE_0_joi_browser___default.a.validate(obj, userDataSchema);
+  const { error } = __WEBPACK_IMPORTED_MODULE_0_joi_browser___default.a.validate(obj, userDataSchema, { allowUnknown: true });
   return !error;
 };
 /* harmony export (immutable) */ __webpack_exports__["a"] = isValidUserData;
