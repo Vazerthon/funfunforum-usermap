@@ -38,6 +38,7 @@ export const showToast = (message, displayFor = 5000) => {
     z-index: 9999;
     border-radius: 30px;
     text-align: center;
+    padding: 0 8px;
   `;
 
   const toast = document.getElementById('toast') || appendChild('div', 'toast', toastStyle);
