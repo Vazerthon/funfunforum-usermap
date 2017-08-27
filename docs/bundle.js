@@ -525,11 +525,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 Object(__WEBPACK_IMPORTED_MODULE_0__services___["e" /* renderMapHost */])('mapHost');
 Object(__WEBPACK_IMPORTED_MODULE_0__services___["d" /* initMap */])('mapHost');
 
+const htmlCaption = (username, caption) => `
+  <p><b><center>${username}</center></b></p>
+  <p>${caption}</p>
+`;
+
 const addUserMarkers = async () => {
   const forumDataResult = await Object(__WEBPACK_IMPORTED_MODULE_0__services___["c" /* fetchForumData */])();
   const forumData = await forumDataResult.json();
   const userLocationData = Object(__WEBPACK_IMPORTED_MODULE_0__services___["b" /* extractUserLocations */])(forumData);
-  userLocationData.map(l => Object(__WEBPACK_IMPORTED_MODULE_0__services___["a" /* addMapMarker */])(l));
+  userLocationData
+    .map(l => ({ lat: l.lat, lng: l.lng, caption: htmlCaption(l.username, l.caption) }))
+    .map(l => Object(__WEBPACK_IMPORTED_MODULE_0__services___["a" /* addMapMarker */])(l));
 };
 
 addUserMarkers();
@@ -604,7 +611,7 @@ const initMap = (hostId) => {
 
 const addMapMarker = ({ lat, lng, caption }) => {
   const mark = Object(__WEBPACK_IMPORTED_MODULE_0_leaflet__["marker"])([lat, lng], { icon: defaultIcon }).addTo(userMap);
-  mark.bindPopup(caption).openPopup();
+  mark.bindPopup(caption);
 };
 /* harmony export (immutable) */ __webpack_exports__["a"] = addMapMarker;
 
