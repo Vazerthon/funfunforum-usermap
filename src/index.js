@@ -19,12 +19,12 @@ const htmlCaption = (username, caption) => `
 const addUserMarkers = async () => {
   const forumDataResult = await fetchForumData();
   if (!forumDataResult.ok) {
-    showToast(forumDataResult.statusText);
+    showToast(`Problem loading forum data: ${forumDataResult.statusText}`);
     return;
   }
   const forumData = await forumDataResult.json();
   if (!Array.isArray(forumData)) {
-    showToast('Forum data seems to be in the wrong format, we need an array');
+    showToast('Problem loading forum data: expected an array');
     return;
   }
   const userLocationData = extractUserLocations(forumData);
