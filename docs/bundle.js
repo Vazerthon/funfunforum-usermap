@@ -9538,7 +9538,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 (0, _services.initMap)('mapHost');
 
 var htmlCaption = function htmlCaption(username, caption) {
-  return '\n  <p><b><center>' + username + '</center></b></p>\n  <p>' + caption + '</p>\n';
+  return '\n  <a href="https://www.funfunforum.com/u/' + username + '/">' + username + '</a>\n  <p>' + caption + '</p>\n';
 };
 
 var addUserMarkers = function () {
@@ -33341,7 +33341,7 @@ exports = module.exports = __webpack_require__(124)(undefined);
 
 
 // module
-exports.push([module.i, "body {\r\n  margin: 0;\r\n}\r\n", ""]);
+exports.push([module.i, "body {\r\n  margin: 0;\r\n}\r\n\r\n.leaflet-popup-content {\r\n  text-align: center;\r\n}\r\n\r\n.leaflet-popup-content a {\r\n  font-weight: bold;\r\n}\r\n", ""]);
 
 // exports
 
