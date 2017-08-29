@@ -17,6 +17,17 @@ const defaultIcon = icon({
   iconAnchor: [12, 36],
 });
 
+const userIcon = username =>
+  icon({
+    iconRetinaUrl: `https://cdn-standard6.discourse.org/user_avatar/www.funfunforum.com/${username}/240/1285_1.png`,
+    iconUrl: `https://cdn-standard6.discourse.org/user_avatar/www.funfunforum.com/${username}/90/149_1.png`,
+    shadowUrl: null,
+    popupAnchor: [0, -20],
+    iconSize: [28, 28],
+    iconAnchor: [14, 28],
+    className: 'marker-user-icon',
+  });
+
 export const initMap = (hostId) => {
   userMap = map(hostId, { worldCopyJump: true });
 
@@ -30,7 +41,9 @@ export const initMap = (hostId) => {
   userMap.addLayer(tiles);
 };
 
-export const addMapMarker = ({ lat, lng, caption }) => {
-  const mark = marker([lat, lng], { icon: defaultIcon }).addTo(userMap);
+export const addMapMarker = ({ username, lat, lng, caption }) => {
+  const mark = marker([lat, lng], {
+    icon: username ? userIcon(username) : defaultIcon,
+  }).addTo(userMap);
   mark.bindPopup(caption);
 };

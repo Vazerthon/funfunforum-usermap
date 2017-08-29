@@ -9,3 +9,7 @@ body {
 .leaflet-popup-content a {
   font-weight: bold;
 }
+
+.marker-user-icon {
+  border-radius: 100%;
+}
