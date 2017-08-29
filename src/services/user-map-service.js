@@ -1,4 +1,4 @@
-import { map, tileLayer, marker, icon } from 'leaflet';
+import { map, tileLayer, marker, icon, divIcon } from 'leaflet';
 import '../../node_modules/leaflet/dist/leaflet.css';
 import markerIcon2x from '../../node_modules/leaflet/dist/images/marker-icon-2x.png';
 import markerIcon from '../../node_modules/leaflet/dist/images/marker-icon.png';
@@ -18,14 +18,13 @@ const defaultIcon = icon({
 });
 
 const userIcon = username =>
-  icon({
-    iconRetinaUrl: `https://cdn-standard6.discourse.org/user_avatar/www.funfunforum.com/${username}/240/1285_1.png`,
-    iconUrl: `https://cdn-standard6.discourse.org/user_avatar/www.funfunforum.com/${username}/90/149_1.png`,
+  divIcon({
     shadowUrl: null,
     popupAnchor: [0, -20],
     iconSize: [28, 28],
     iconAnchor: [14, 28],
     className: 'marker-user-icon',
+    html: `<img class="marker-user-icon__image" width="28" height="28" src="https://cdn-standard6.discourse.org/user_avatar/www.funfunforum.com/${username}/90/149_1.png" />`,
   });
 
 export const initMap = (hostId) => {

@@ -11,5 +11,18 @@ body {
 }
 
 .marker-user-icon {
-  border-radius: 100%;
+  position: relative;
+  background-image: url(../node_modules/leaflet/dist/images/marker-icon.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.marker-user-icon__image {
+  position: absolute;
+  top: 7%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
 }
