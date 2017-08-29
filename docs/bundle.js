@@ -9581,7 +9581,7 @@ var addUserMarkers = function () {
             userLocationData = (0, _services.extractUserLocations)(forumData);
 
             userLocationData.map(function (l) {
-              return { lat: l.lat, lng: l.lng, caption: htmlCaption(l.username, l.caption) };
+              return { username: l.username, lat: l.lat, lng: l.lng, caption: htmlCaption(l.username, l.caption) };
             }).map(function (l) {
               return (0, _services.addMapMarker)(l);
             });
@@ -9693,6 +9693,18 @@ var defaultIcon = (0, _leaflet.icon)({
   iconAnchor: [12, 36]
 });
 
+var userIcon = function userIcon(username) {
+  return (0, _leaflet.icon)({
+    iconRetinaUrl: 'https://cdn-standard6.discourse.org/user_avatar/www.funfunforum.com/' + username + '/240/1285_1.png',
+    iconUrl: 'https://cdn-standard6.discourse.org/user_avatar/www.funfunforum.com/' + username + '/90/149_1.png',
+    shadowUrl: null,
+    popupAnchor: [0, -20],
+    iconSize: [28, 28],
+    iconAnchor: [14, 28],
+    className: 'marker-user-icon'
+  });
+};
+
 var initMap = exports.initMap = function initMap(hostId) {
   userMap = (0, _leaflet.map)(hostId, { worldCopyJump: true });
 
@@ -9707,11 +9719,14 @@ var initMap = exports.initMap = function initMap(hostId) {
 };
 
 var addMapMarker = exports.addMapMarker = function addMapMarker(_ref) {
-  var lat = _ref.lat,
+  var username = _ref.username,
+      lat = _ref.lat,
       lng = _ref.lng,
       caption = _ref.caption;
 
-  var mark = (0, _leaflet.marker)([lat, lng], { icon: defaultIcon }).addTo(userMap);
+  var mark = (0, _leaflet.marker)([lat, lng], {
+    icon: username ? userIcon(username) : defaultIcon
+  }).addTo(userMap);
   mark.bindPopup(caption);
 };
 
@@ -33341,7 +33356,7 @@ exports = module.exports = __webpack_require__(124)(undefined);
 
 
 // module
-exports.push([module.i, "body {\r\n  margin: 0;\r\n}\r\n\r\n.leaflet-popup-content {\r\n  text-align: center;\r\n}\r\n\r\n.leaflet-popup-content a {\r\n  font-weight: bold;\r\n}\r\n", ""]);
+exports.push([module.i, "body {\r\n  margin: 0;\r\n}\r\n\r\n.leaflet-popup-content {\r\n  text-align: center;\r\n}\r\n\r\n.leaflet-popup-content a {\r\n  font-weight: bold;\r\n}\r\n\r\n.marker-user-icon {\r\n  border-radius: 100%;\r\n}", ""]);
 
 // exports
 
