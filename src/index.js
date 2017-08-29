@@ -12,7 +12,7 @@ renderMapHost('mapHost');
 initMap('mapHost');
 
 const htmlCaption = (username, caption) => `
-  <p><b><center>${username}</center></b></p>
+  <a href="https://www.funfunforum.com/u/${username}/">${username}</a>
   <p>${caption}</p>
 `;
 
