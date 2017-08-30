@@ -19,12 +19,11 @@ const defaultIcon = icon({
 
 const userIcon = username =>
   divIcon({
-    shadowUrl: null,
     popupAnchor: [0, -20],
     iconSize: [28, 28],
     iconAnchor: [14, 28],
     className: 'marker-user-icon',
-    html: `<img class="marker-user-icon__image" width="28" height="28" src="https://cdn-standard6.discourse.org/user_avatar/www.funfunforum.com/${username}/90/149_1.png" />`,
+    html: `<img class="marker-user-icon__image" src="https://cdn-standard6.discourse.org/user_avatar/www.funfunforum.com/${username}/90/149_1.png" />`,
   });
 
 export const initMap = (hostId) => {
