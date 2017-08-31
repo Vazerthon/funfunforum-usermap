@@ -29,18 +29,17 @@ const userIcon = username =>
   });
 
 export const initMap = (hostId) => {
-  userMap = L.map(hostId, { worldCopyJump: true });
-
+  heat = L.heatLayer([], { radius: 100 });
   const tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
     minZoom: 3,
     maxZoom: 18,
   });
 
+  userMap = L.map(hostId, { worldCopyJump: true, layers: [tiles, heat] });
   userMap.setView([55.942, -3.21], 3);
-  userMap.addLayer(tiles);
 
-  heat = L.heatLayer([], { radius: 25 }).addTo(userMap);
+  L.control.layers({ Heatmap: heat, 'Open Street Map': tiles }).addTo(userMap);
 };
 
 export const addMapMarker = ({ username, lat, lng, caption }) => {
