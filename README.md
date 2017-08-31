@@ -2,7 +2,7 @@
 A map showing the physical locations of [funfunforum.com](funfunforum.com) users. Fun Fun Forum is the private forum for the [YouTube show Fun Fun Function](https://www.youtube.com/channel/UCO1cgjhGzsSYb1rsB4bFe4Q), and is open to Patrons only. If you are not a Patron, you can quickly become one for a measly $1/month by going to our fine [Patreon page.](https://www.patreon.com/funfunfunction/)
 
 # Hosted Map
-The map is hosted on the GitHub page associated with this repository. You can see it here - vazerthon.github.io/funfunforum-usermap
+The map is hosted on the GitHub page associated with this repository. You can see it here - [vazerthon.github.io/funfunforum-usermap](vazerthon.github.io/funfunforum-usermap)
 
 # Building
 ```bash
