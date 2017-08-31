@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
   entry: ['babel-polyfill', './src/index.js'],
@@ -10,6 +11,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Fun Fun Forum - User Map',
+      template: path.join(__dirname, 'src/index.ejs'),
     }),
     new webpack.ProvidePlugin({ fetch: 'isomorphic-fetch' }),
   ],
