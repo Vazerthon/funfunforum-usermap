@@ -1,14 +1,16 @@
-import { map, tileLayer, marker, icon, divIcon } from 'leaflet';
+import L from 'leaflet';
+import exec from 'leaflet.heat';
 import '../../node_modules/leaflet/dist/leaflet.css';
 import markerIcon2x from '../../node_modules/leaflet/dist/images/marker-icon-2x.png';
 import markerIcon from '../../node_modules/leaflet/dist/images/marker-icon.png';
 import markerShadow from '../../node_modules/leaflet/dist/images/marker-shadow.png';
 
 let userMap;
+let heat;
 
 // without this the default icon won't show
 // https://github.com/PaulLeCam/react-leaflet/issues/255
-const defaultIcon = icon({
+const defaultIcon = L.icon({
   iconRetinaUrl: markerIcon2x,
   iconUrl: markerIcon,
   shadowUrl: markerShadow,
@@ -18,7 +20,7 @@ const defaultIcon = icon({
 });
 
 const userIcon = username =>
-  divIcon({
+  L.divIcon({
     popupAnchor: [0, -20],
     iconSize: [28, 28],
     iconAnchor: [14, 28],
@@ -27,9 +29,9 @@ const userIcon = username =>
   });
 
 export const initMap = (hostId) => {
-  userMap = map(hostId, { worldCopyJump: true });
+  userMap = L.map(hostId, { worldCopyJump: true });
 
-  const tiles = tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+  const tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
     minZoom: 3,
     maxZoom: 18,
@@ -37,11 +39,15 @@ export const initMap = (hostId) => {
 
   userMap.setView([55.942, -3.21], 3);
   userMap.addLayer(tiles);
+
+  heat = L.heatLayer([], { radius: 25 }).addTo(userMap);
 };
 
 export const addMapMarker = ({ username, lat, lng, caption }) => {
-  const mark = marker([lat, lng], {
+  const mark = L.marker([lat, lng], {
     icon: username ? userIcon(username) : defaultIcon,
   }).addTo(userMap);
   mark.bindPopup(caption);
+
+  heat.addLatLng([lat, lng, 5]);
 };

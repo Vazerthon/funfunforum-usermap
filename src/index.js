@@ -29,7 +29,12 @@ const addUserMarkers = async () => {
   }
   const userLocationData = extractUserLocations(forumData);
   userLocationData
-    .map(l => ({ username: l.username, lat: l.lat, lng: l.lng, caption: htmlCaption(l.username, l.caption) }))
+    .map(l => ({
+      username: l.username,
+      lat: l.lat,
+      lng: l.lng,
+      caption: htmlCaption(l.username, l.caption),
+    }))
     .map(l => addMapMarker(l));
 
   showToast(
