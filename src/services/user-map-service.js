@@ -20,7 +20,8 @@ const defaultIcon = icon({
 const userIcon = username =>
   divIcon({
     popupAnchor: [0, -20],
-    iconSize: [28, 28],
+    shadowUrl: markerShadow,
+    iconSize: [28, 36],
     iconAnchor: [14, 28],
     className: 'marker-user-icon',
     html: `<img class="marker-user-icon__image" src="https://cdn-standard6.discourse.org/user_avatar/www.funfunforum.com/${username}/90/149_1.png" />`,

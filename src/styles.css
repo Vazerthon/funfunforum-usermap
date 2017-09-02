@@ -55,9 +55,9 @@ body {
 
 .marker-user-icon__image {
   position: absolute;
-  top: 7%;
-  left: 25%;
-  width: 50%;
+  top: 10%;
+  left: 22%;
+  width: 60%;
   height: 50%;
   border-radius: 50%;
 }
