@@ -9534,8 +9534,7 @@ __webpack_require__(351);
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
-(0, _services.renderMapHost)('mapHost');
-(0, _services.initMap)('mapHost');
+(0, _services.initMap)('map-host');
 
 var htmlCaption = function htmlCaption(username, caption) {
   return '\n  <a href="https://www.funfunforum.com/u/' + username + '/">' + username + '</a>\n  <p>' + caption + '</p>\n';
@@ -9638,17 +9637,16 @@ Object.keys(_forumDataFetchService).forEach(function (key) {
   });
 });
 
-var _domService = __webpack_require__(350);
+var _toast = __webpack_require__(350);
 
-Object.keys(_domService).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _domService[key];
-    }
-  });
+Object.defineProperty(exports, 'showToast', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_toast).default;
+  }
 });
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
 /* 335 */
@@ -33276,43 +33274,22 @@ return /******/ (function(modules) { // webpackBootstrap
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var appendChild = function appendChild(elem, id, style, parent) {
-  var element = document.createElement(elem);
-  element.id = id;
-
-  element.setAttribute('style', style);
-
-  var parentElem = parent || document.body;
-  parentElem.appendChild(element);
-  return element;
-};
-
-var timedRemoveElement = function timedRemoveElement(removeAfter, elem) {
-  setTimeout(function () {
-    if (!elem) {
-      return;
-    }
-    elem.parentNode.removeChild(elem);
-  }, removeAfter);
-};
-
-var renderMapHost = exports.renderMapHost = function renderMapHost(hostId) {
-  var style = '\n    width: 100vw;\n    height: 100vh;\n  ';
-
-  appendChild('div', hostId, style);
-};
-
-var showToast = exports.showToast = function showToast(message) {
+var showToast = function showToast(message) {
   var displayFor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 5000;
 
-  var toastStyle = '\n    width: 50vw;\n    background: #444;\n    color: #fff;\n    position: absolute;\n    top: 30%;\n    left: 25%;\n    z-index: 9999;\n    border-radius: 30px;\n    text-align: center;\n    padding: 0 8px;\n  ';
-
-  var toast = document.getElementById('toast') || appendChild('div', 'toast', toastStyle);
-  var toastMessage = document.getElementById('toast-message') || appendChild('h3', 'toast-message', null, toast);
+  var toast = document.getElementById('toast');
+  var toastMessage = document.getElementById('toast-message');
   toastMessage.innerText = message;
 
-  timedRemoveElement(displayFor, toast);
+  toast.classList.remove('hidden');
+  toast.classList.add('showing');
+  setTimeout(function () {
+    toast.classList.remove('showing');
+    toast.classList.add('hidden');
+  }, displayFor);
 };
+
+exports.default = showToast;
 
 /***/ }),
 /* 351 */
@@ -33354,7 +33331,7 @@ exports = module.exports = __webpack_require__(125)(undefined);
 
 
 // module
-exports.push([module.i, "body {\r\n  margin: 0;\r\n}\r\n\r\n.leaflet-popup-content {\r\n  text-align: center;\r\n}\r\n\r\n.leaflet-popup-content a {\r\n  font-weight: bold;\r\n}\r\n\r\n.marker-user-icon {\r\n  position: relative;\r\n  background-image: url(" + __webpack_require__(90) + ");\r\n  background-repeat: no-repeat;\r\n  background-size: contain;\r\n  background-position: center;\r\n}\r\n\r\n.marker-user-icon__image {\r\n  position: absolute;\r\n  top: 7%;\r\n  left: 25%;\r\n  width: 50%;\r\n  height: 50%;\r\n  border-radius: 50%;\r\n}", ""]);
+exports.push([module.i, "body {\r\n  margin: 0;\r\n}\r\n\r\n#map-host {\r\n  width: 100vw;\r\n  height: 100vh;\r\n}\r\n\r\n#toast {\r\n  width: 50vw;\r\n  background: #444;\r\n  color: #fff;\r\n  position: absolute;\r\n  top: 30%;\r\n  left: 25%;\r\n  z-index: 9999;\r\n  border-radius: 30px;\r\n  text-align: center;\r\n  padding: 0 8px;\r\n  visibility: hidden;\r\n}\r\n\r\n#toast.hidden {\r\n  opacity: 0;\r\n  visibility: hidden;\r\n\r\n  -webkit-transition: visibility 0s 3s, opacity 3s ease-out;\r\n  -moz-transition: visibility 0s 3s, opacity 3s ease-out;\r\n  -ms-transition: visibility 0s 3s, opacity 3s ease-out;\r\n  -o-transition: visibility 0s 3s, opacity 3s ease-out;\r\n  transition: visibility 0s 3s, opacity 3s ease-out;\r\n}\r\n\r\n#toast.showing {\r\n  opacity: 1;\r\n  visibility: visible;\r\n}\r\n\r\n.leaflet-popup-content {\r\n  text-align: center;\r\n}\r\n\r\n.leaflet-popup-content a {\r\n  font-weight: bold;\r\n}\r\n\r\n.marker-user-icon {\r\n  position: relative;\r\n  background-image: url(" + __webpack_require__(90) + ");\r\n  background-repeat: no-repeat;\r\n  background-size: contain;\r\n  background-position: center;\r\n}\r\n\r\n.marker-user-icon__image {\r\n  position: absolute;\r\n  top: 7%;\r\n  left: 25%;\r\n  width: 50%;\r\n  height: 50%;\r\n  border-radius: 50%;\r\n}", ""]);
 
 // exports
 
