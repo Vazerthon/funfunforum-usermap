@@ -3,13 +3,11 @@ import {
   addMapMarker,
   fetchForumData,
   extractUserLocations,
-  renderMapHost,
   showToast,
 } from './services/';
 import './styles.css';
 
-renderMapHost('mapHost');
-initMap('mapHost');
+initMap('map-host');
 
 const htmlCaption = (username, caption) => `
   <a href="https://www.funfunforum.com/u/${username}/">${username}</a>

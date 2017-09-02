@@ -2,6 +2,11 @@ body {
   margin: 0;
 }
 
+#map-host {
+  width: 100vw;
+  height: 100vh;
+}
+
 .leaflet-popup-content {
   text-align: center;
 }

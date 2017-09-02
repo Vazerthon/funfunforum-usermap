@@ -18,15 +18,6 @@ const timedRemoveElement = (removeAfter, elem) => {
   }, removeAfter);
 };
 
-export const renderMapHost = (hostId) => {
-  const style = `
-    width: 100vw;
-    height: 100vh;
-  `;
-
-  appendChild('div', hostId, style);
-};
-
 export const showToast = (message, displayFor = 5000) => {
   const toastStyle = `
     width: 50vw;
