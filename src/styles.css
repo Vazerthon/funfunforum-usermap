@@ -7,6 +7,36 @@ body {
   height: 100vh;
 }
 
+#toast {
+  width: 50vw;
+  background: #444;
+  color: #fff;
+  position: absolute;
+  top: 30%;
+  left: 25%;
+  z-index: 9999;
+  border-radius: 30px;
+  text-align: center;
+  padding: 0 8px;
+  visibility: hidden;
+}
+
+#toast.hidden {
+  opacity: 0;
+  visibility: hidden;
+
+  -webkit-transition: visibility 0s 3s, opacity 3s ease-out;
+  -moz-transition: visibility 0s 3s, opacity 3s ease-out;
+  -ms-transition: visibility 0s 3s, opacity 3s ease-out;
+  -o-transition: visibility 0s 3s, opacity 3s ease-out;
+  transition: visibility 0s 3s, opacity 3s ease-out;
+}
+
+#toast.showing {
+  opacity: 1;
+  visibility: visible;
+}
+
 .leaflet-popup-content {
   text-align: center;
 }
