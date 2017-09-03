@@ -8,6 +8,21 @@ const mapUserToLocationData = user => ({
   username: user.username,
   ...parseLocation(user),
 });
-const mapToLocationData = data => filterInvalidUserData(data).map(mapUserToLocationData);
+
+const combineDuplicateCoords = (location, index, locations) => ({
+  coords: { lat: location.lat, lng: location.lng },
+  users: locations.filter(l => l.lat === location.lat && l.lng === location.lng),
+});
+
+const setUsername = location => ({
+  ...location,
+  username: location.users.length > 1 ? null : location.users[0].username,
+});
+
+const mapToLocationData = data =>
+  filterInvalidUserData(data)
+    .map(mapUserToLocationData)
+    .map(combineDuplicateCoords)
+    .map(setUsername);
 
 export const extractUserLocations = forumData => mapToLocationData(forumData);
