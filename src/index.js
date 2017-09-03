@@ -43,7 +43,7 @@ const addUserMarkers = async () => {
     showToast('Problem loading forum data: expected an array');
     return;
   }
-  const userLocationData = extractUserLocations(forumData, 1.2);
+  const userLocationData = extractUserLocations(forumData);
   userLocationData.map(addCaptions).map(combineCaptions).map(l =>
     addMapMarker({
       lat: l.coords.lat,
