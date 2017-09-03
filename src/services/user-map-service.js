@@ -27,9 +27,9 @@ const userIcon = username =>
 
 const groupMarker = count =>
   divIcon({
-    popupAnchor: [0, 0],
+    popupAnchor: [0, -50],
     iconSize: [100, 100],
-    iconAnchor: [10, 10],
+    iconAnchor: [50, 50],
     className: 'marker-group-icon',
     html: `<h3>${count}</h3>`,
   });

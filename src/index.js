@@ -33,6 +33,13 @@ const combineCaptions = multiUserLocation => ({
   `,
 });
 
+// const uniqueByCoords = (prev, current) => {
+//   const existing = prev.some(
+//     i => i.coords && i.coords.lat === current.coords.lat && i.coords.lng === current.coords.lng,
+//   );
+//   return [...prev, existing ? null : current];
+// };
+
 const addUserMarkers = (forumData) => {
   const userLocationData = extractUserLocations(forumData);
   userLocationData.map(addCaptions).map(combineCaptions).map(l =>
@@ -48,15 +55,23 @@ const addUserMarkers = (forumData) => {
 };
 
 const addGroupMarkers = (forumData) => {
-  const userLocationData = extractUserLocations(forumData, 2);
-  userLocationData.map(addCaptions).map(combineCaptions).map(l =>
-    addGroupMarker({
-      lat: l.coords.lat,
-      lng: l.coords.lng,
-      caption: l.caption,
-      count: l.users.length,
-    }),
-  );
+  const userLocationData = extractUserLocations(forumData, 1.2);
+  userLocationData
+    .map(addCaptions)
+    .map(combineCaptions)
+    .filter(l => l.users.length > 1)
+    // .reduce(uniqueByCoords, [])
+    .map(
+      l =>
+        (l
+          ? addGroupMarker({
+            lat: l.coords.lat,
+            lng: l.coords.lng,
+            caption: l.caption,
+            count: l.users.length,
+          })
+          : null),
+    );
 
   return userLocationData.length;
 };
