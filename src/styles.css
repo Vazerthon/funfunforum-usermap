@@ -68,6 +68,14 @@ body {
   border-radius: 50%;
 }
 
+.marker-group-icon {
+  background: #f0f;
+  border-radius: 50%;
+  opacity: 0.3;
+  text-align: center;
+  font-size: 3em;
+}
+
 .profiles-container {
   display: flex;
   flex-wrap: wrap;
