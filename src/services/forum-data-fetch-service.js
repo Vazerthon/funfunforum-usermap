@@ -32,3 +32,6 @@ const mapToLocationData = (data, dedupeThreshold) =>
 
 export const extractUserLocations = (forumData, dedupeThreshold = 0) =>
   mapToLocationData(forumData, dedupeThreshold);
+
+export const profileImage = username =>
+  `https://cdn-standard6.discourse.org/user_avatar/www.funfunforum.com/${username}/90/149_1.png`;

@@ -2,11 +2,10 @@ import { map, tileLayer, marker, icon, divIcon } from 'leaflet';
 import '../../node_modules/leaflet/dist/leaflet.css';
 import markerIcon2x from '../../node_modules/leaflet/dist/images/marker-icon-2x.png';
 import markerIcon from '../../node_modules/leaflet/dist/images/marker-icon.png';
+import { profileImage } from './';
 
 let userMap;
 
-// without this the default icon won't show
-// https://github.com/PaulLeCam/react-leaflet/issues/255
 const defaultIcon = icon({
   iconRetinaUrl: markerIcon2x,
   iconUrl: markerIcon,
@@ -21,7 +20,7 @@ const userIcon = username =>
     iconSize: [28, 36],
     iconAnchor: [14, 28],
     className: 'marker-user-icon',
-    html: `<img class="marker-user-icon__image" src="https://cdn-standard6.discourse.org/user_avatar/www.funfunforum.com/${username}/90/149_1.png" />`,
+    html: `<img class="marker-user-icon__image" src="${profileImage(username)}" />`,
   });
 
 export const initMap = (hostId) => {

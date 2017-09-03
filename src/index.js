@@ -5,13 +5,17 @@ import {
   fetchForumData,
   extractUserLocations,
   showToast,
+  profileImage,
 } from './services/';
 
 initMap('map-host');
 
 const htmlCaption = (username, caption) => `
-  <a href="https://www.funfunforum.com/u/${username}/">${username}</a>
-  <p>${caption}</p>
+  <div class="profile-container">
+    <a class="profile-link" href="https://www.funfunforum.com/u/${username}/">${username}</a>
+    <img class="profile-image" src="${profileImage(username)}" />
+    <span class="profile-caption">${caption}</span>
+  </div>
 `;
 
 const addCaptions = location => ({
@@ -21,7 +25,11 @@ const addCaptions = location => ({
 
 const combineCaptions = multiUserLocation => ({
   ...multiUserLocation,
-  caption: multiUserLocation.captions.reduce((p, c) => `${p}${p ? '<hr />' : ''}${c}`, ''),
+  caption: `
+    <div class="profiles-container">
+      ${multiUserLocation.captions.reduce((p, c) => `${p}${p ? '' : ''}${c}`, '')}
+    </div>
+  `,
 });
 
 const addUserMarkers = async () => {
