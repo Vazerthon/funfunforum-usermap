@@ -2,6 +2,7 @@ import { isValidUserData } from '../schema/';
 
 export const fetchForumData = () => fetch('https://ffforumautomator.herokuapp.com/hackable-data');
 
+const between = (x, min, max) => x >= min && x <= max;
 const filterInvalidUserData = data => data.filter(isValidUserData);
 const parseLocation = user => JSON.parse(user.hackable_json).usermap_location;
 const mapUserToLocationData = user => ({
@@ -9,9 +10,13 @@ const mapUserToLocationData = user => ({
   ...parseLocation(user),
 });
 
-const combineDuplicateCoords = (location, index, locations) => ({
+const combineDuplicateCoords = threshold => (location, index, locations) => ({
   coords: { lat: location.lat, lng: location.lng },
-  users: locations.filter(l => l.lat === location.lat && l.lng === location.lng),
+  users: locations.filter(
+    l =>
+      between(l.lat, location.lat - threshold, location.lat + threshold) &&
+      between(l.lng, location.lng - threshold, location.lng + threshold),
+  ),
 });
 
 const setUsername = location => ({
@@ -19,10 +24,11 @@ const setUsername = location => ({
   username: location.users.length > 1 ? null : location.users[0].username,
 });
 
-const mapToLocationData = data =>
+const mapToLocationData = (data, dedupeThreshold) =>
   filterInvalidUserData(data)
     .map(mapUserToLocationData)
-    .map(combineDuplicateCoords)
+    .map(combineDuplicateCoords(dedupeThreshold))
     .map(setUsername);
 
-export const extractUserLocations = forumData => mapToLocationData(forumData);
+export const extractUserLocations = (forumData, dedupeThreshold = 0) =>
+  mapToLocationData(forumData, dedupeThreshold);
