@@ -1,4 +1,4 @@
-import { map, tileLayer, marker, icon } from 'leaflet';
+import { map, tileLayer, marker, icon, divIcon } from 'leaflet';
 import '../../node_modules/leaflet/dist/leaflet.css';
 import markerIcon2x from '../../node_modules/leaflet/dist/images/marker-icon-2x.png';
 import markerIcon from '../../node_modules/leaflet/dist/images/marker-icon.png';
@@ -17,6 +17,16 @@ const defaultIcon = icon({
   iconAnchor: [12, 36],
 });
 
+const userIcon = username =>
+  divIcon({
+    popupAnchor: [0, -20],
+    shadowUrl: markerShadow,
+    iconSize: [28, 36],
+    iconAnchor: [14, 28],
+    className: 'marker-user-icon',
+    html: `<img class="marker-user-icon__image" src="https://cdn-standard6.discourse.org/user_avatar/www.funfunforum.com/${username}/90/149_1.png" />`,
+  });
+
 export const initMap = (hostId) => {
   userMap = map(hostId, { worldCopyJump: true });
 
@@ -30,7 +40,9 @@ export const initMap = (hostId) => {
   userMap.addLayer(tiles);
 };
 
-export const addMapMarker = ({ lat, lng, caption }) => {
-  const mark = marker([lat, lng], { icon: defaultIcon }).addTo(userMap);
+export const addMapMarker = ({ username, lat, lng, caption }) => {
+  const mark = marker([lat, lng], {
+    icon: username ? userIcon(username) : defaultIcon,
+  }).addTo(userMap);
   mark.bindPopup(caption);
 };

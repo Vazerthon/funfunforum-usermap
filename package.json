@@ -1,21 +1,25 @@
 {
   "name": "funfunforum-usermap",
   "version": "1.0.0",
-  "description": "A map showing the physical locations of funfunforum.com users",
+  "description":
+    "A map showing the physical locations of funfunforum.com users",
   "main": "index.js",
   "repository": "https://github.com/Vazerthon/funfunforum-usermap",
   "author": "Vazerthon",
   "license": "MIT",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack -p",
+    "githubpage": "cross-env NODE_ENV='production' yarn build",
     "start": "webpack-dev-server --progress --colors"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "babel-runtime": "^6.26.0",
+    "cross-env": "^5.0.5",
     "css-loader": "^0.28.5",
     "eslint-config-airbnb-base": "^11.3.2",
     "eslint-plugin-import": "^2.7.0",
