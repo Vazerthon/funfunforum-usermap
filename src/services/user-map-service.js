@@ -2,7 +2,6 @@ import { map, tileLayer, marker, icon, divIcon } from 'leaflet';
 import '../../node_modules/leaflet/dist/leaflet.css';
 import markerIcon2x from '../../node_modules/leaflet/dist/images/marker-icon-2x.png';
 import markerIcon from '../../node_modules/leaflet/dist/images/marker-icon.png';
-import markerShadow from '../../node_modules/leaflet/dist/images/marker-shadow.png';
 
 let userMap;
 
@@ -11,7 +10,6 @@ let userMap;
 const defaultIcon = icon({
   iconRetinaUrl: markerIcon2x,
   iconUrl: markerIcon,
-  shadowUrl: markerShadow,
   popupAnchor: [0, -38],
   iconSize: [24, 36],
   iconAnchor: [12, 36],
@@ -20,7 +18,6 @@ const defaultIcon = icon({
 const userIcon = username =>
   divIcon({
     popupAnchor: [0, -20],
-    shadowUrl: markerShadow,
     iconSize: [28, 36],
     iconAnchor: [14, 28],
     className: 'marker-user-icon',
