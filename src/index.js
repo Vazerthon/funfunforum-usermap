@@ -1,13 +1,13 @@
-import './styles.css';
+import "./styles.css";
 import {
   initMap,
   addMapMarker,
   fetchForumData,
   extractUserLocations,
-  showToast,
-} from './services/';
+  showToast
+} from "./services/";
 
-initMap('map-host');
+initMap("map-host");
 
 const htmlCaption = (username, caption) => `
   <a href="https://www.funfunforum.com/u/${username}/">${username}</a>
@@ -16,22 +16,25 @@ const htmlCaption = (username, caption) => `
 
 const combineDuplicateCoords = (location, index, locations) => ({
   coords: { lat: location.lat, lng: location.lng },
-  users: locations.filter(l => l.lat === location.lat && l.lng === location.lng),
+  users: locations.filter(l => l.lat === location.lat && l.lng === location.lng)
 });
 
 const addCaptions = location => ({
   ...location,
-  captions: location.users.map(u => htmlCaption(u.username, u.caption)),
+  captions: location.users.map(u => htmlCaption(u.username, u.caption))
 });
 
 const combineCaptions = multiUserLocation => ({
   ...multiUserLocation,
-  caption: multiUserLocation.captions.reduce((p, c) => `${p}${p ? '<hr />' : ''}${c}`, ''),
+  caption: multiUserLocation.captions.reduce(
+    (p, c) => `${p}${p ? "<hr />" : ""}${c}`,
+    ""
+  )
 });
 
 const setUsername = location => ({
   ...location,
-  username: location.users.length > 1 ? null : location.users[0].username,
+  username: location.users.length > 1 ? null : location.users[0].username
 });
 
 const addUserMarkers = async () => {
@@ -42,7 +45,7 @@ const addUserMarkers = async () => {
   }
   const forumData = await forumDataResult.json();
   if (!Array.isArray(forumData)) {
-    showToast('Problem loading forum data: expected an array');
+    showToast("Problem loading forum data: expected an array");
     return;
   }
   const userLocationData = extractUserLocations(forumData);
@@ -51,17 +54,18 @@ const addUserMarkers = async () => {
     .map(addCaptions)
     .map(combineCaptions)
     .map(setUsername)
-    .map(l =>
-      addMapMarker({
+    .map(l => {
+      return addMapMarker({
         lat: l.coords.lat,
         lng: l.coords.lng,
         username: l.username,
         caption: l.caption,
-      }),
-    );
+        hideProfilePicture: l.hideProfilePicture
+      });
+    });
 
   showToast(
-    `Loaded forum data for ${forumData.length} users, ${userLocationData.length} of them have a location set`,
+    `Loaded forum data for ${forumData.length} users, ${userLocationData.length} of them have a location set`
   );
 };
 
