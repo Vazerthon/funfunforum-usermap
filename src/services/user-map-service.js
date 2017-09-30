@@ -15,20 +15,21 @@ const defaultIcon = icon({
   iconAnchor: [12, 36],
 });
 
-const userIcon = username =>
+const userIcon = profilePicture =>
   divIcon({
     popupAnchor: [0, -20],
     iconSize: [28, 36],
     iconAnchor: [14, 28],
     className: 'marker-user-icon',
-    html: `<img class="marker-user-icon__image" src="https://cdn-standard6.discourse.org/user_avatar/www.funfunforum.com/${username}/90/149_1.png" />`,
+    html: `<img class="marker-user-icon__image" src="${profilePicture}" />`,
   });
 
-export const initMap = (hostId) => {
+export const initMap = hostId => {
   userMap = map(hostId, { worldCopyJump: true });
 
   const tiles = tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
+    attribution:
+      '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
     minZoom: 3,
     maxZoom: 18,
   });
@@ -37,9 +38,15 @@ export const initMap = (hostId) => {
   userMap.addLayer(tiles);
 };
 
-export const addMapMarker = ({ username, lat, lng, caption }) => {
+export const addMapMarker = ({
+  username,
+  lat,
+  lng,
+  caption,
+  profilePicture,
+}) => {
   const mark = marker([lat, lng], {
-    icon: username ? userIcon(username) : defaultIcon,
+    icon: username ? userIcon(profilePicture) : defaultIcon,
   }).addTo(userMap);
   mark.bindPopup(caption);
 };
