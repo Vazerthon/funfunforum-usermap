@@ -13,6 +13,7 @@ query {
         lat
         lng
         caption
+        default
       }
       error
    } 

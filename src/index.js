@@ -59,6 +59,7 @@ const addUserMarkers = async () => {
 
   users
     .map(toFlatObject)
+    .filter(u => !u.default)
     .map(combineDuplicateCoords)
     .map(addCaptions)
     .map(combineCaptions)
