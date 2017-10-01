@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const dataServiceAddress = 'http://localhost:3000/funfunforum';
+const dataServiceAddress = 'http://fff.mrvallis.co.uk/funfunforum';
 
 const userDataGraphQlQuery = `
 query {
