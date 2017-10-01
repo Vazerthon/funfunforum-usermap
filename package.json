@@ -1,8 +1,7 @@
 {
   "name": "funfunforum-usermap",
   "version": "1.0.0",
-  "description":
-    "A map showing the physical locations of funfunforum.com users",
+  "description": "A map showing the physical locations of funfunforum.com users",
   "main": "index.js",
   "repository": "https://github.com/Vazerthon/funfunforum-usermap",
   "author": "Vazerthon",
@@ -32,9 +31,8 @@
     "webpack-dev-server": "^2.7.1"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "eslint": "^4.5.0",
-    "isomorphic-fetch": "^2.2.1",
-    "joi-browser": "^10.6.1",
     "leaflet": "^1.2.0"
   }
 }
