@@ -44,10 +44,11 @@ const toFlatObject = apiResult => ({
 });
 
 const addUserMarkers = async () => {
-  const forumDataResult = await fetchForumData();
-
-  if (forumDataResult.statusText !== 'OK') {
-    showToast(`Problem loading forum data: ${forumDataResult.statusText}`);
+  let forumDataResult;
+  try {
+    forumDataResult = await fetchForumData();
+  } catch (error) {
+    showToast(`Problem loading forum data: ${error.message}`);
     return;
   }
 
@@ -59,7 +60,6 @@ const addUserMarkers = async () => {
 
   users
     .map(toFlatObject)
-    .filter(u => !u.default)
     .map(combineDuplicateCoords)
     .map(addCaptions)
     .map(combineCaptions)
