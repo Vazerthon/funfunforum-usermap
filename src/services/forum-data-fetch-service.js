@@ -1,27 +1,13 @@
-import axios from 'axios';
+import { isValidUserData } from '../schema/';
 
-const dataServiceAddress = 'http://fff.mrvallis.co.uk/funfunforum';
+export const fetchForumData = () => fetch('https://ffforumautomator.herokuapp.com/hackable-data');
 
-const userDataGraphQlQuery = `
-query {
-  users {
-    profileUrl
-    profilePicture
-    username
-    hackableJson {
-      usermapLocation {
-        lat
-        lng
-        caption
-        default
-      }
-      error
-   } 
-  }
-}
-`;
+const filterInvalidUserData = data => data.filter(isValidUserData);
+const parseLocation = user => JSON.parse(user.hackable_json).usermap_location;
+const mapUserToLocationData = user => ({
+  username: user.username,
+  ...parseLocation(user),
+});
+const mapToLocationData = data => filterInvalidUserData(data).map(mapUserToLocationData);
 
-const fetchForumData = () =>
-  axios.get(`${dataServiceAddress}?query=${userDataGraphQlQuery}`);
-
-export default fetchForumData;
+export const extractUserLocations = forumData => mapToLocationData(forumData);
