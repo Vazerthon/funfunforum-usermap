@@ -3,9 +3,12 @@ import { initMap, addMapMarker, fetchForumData, showToast } from './services/';
 
 initMap('map-host');
 
-const htmlCaption = (username, caption, profileUrl) => `
-  <a href="${profileUrl}">${username}</a>
-  <p>${caption}</p>
+const htmlCaption = (username, caption, profileUrl, profilePicture) => `
+  <div class="profile-container">
+    <a class="profile-link" href="${profileUrl}">${username}</a>
+    <img class="profile-image" src="${profilePicture}" />
+    <span class="profile-caption">${caption}</span>
+  </div>
 `;
 
 const combineDuplicateCoords = (user, index, users) => ({
@@ -16,16 +19,20 @@ const combineDuplicateCoords = (user, index, users) => ({
 const addCaptions = user => ({
   ...user,
   captions: user.users.map(u =>
-    htmlCaption(u.username, u.caption, u.profileUrl),
+    htmlCaption(u.username, u.caption, u.profileUrl, u.profilePicture),
   ),
 });
 
 const combineCaptions = multiUserLocation => ({
   ...multiUserLocation,
-  caption: multiUserLocation.captions.reduce(
-    (p, c) => `${p}${p ? '<hr />' : ''}${c}`,
-    '',
-  ),
+  caption: `
+    <div class="profiles-container">
+      ${multiUserLocation.captions.reduce(
+        (p, c) => `${p}${p ? '' : ''}${c}`,
+        '',
+      )}
+    </div>
+  `,
 });
 
 const setUsernameAndPictureUrl = location => ({
