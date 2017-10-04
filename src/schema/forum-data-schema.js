@@ -3,7 +3,7 @@ import Joi from 'joi-browser';
 export const usermapLocationSchema = Joi.object().keys({
   lat: Joi.number().required(),
   lng: Joi.number().required(),
-  caption: Joi.string().required(),
+  caption: Joi.string().required()
 });
 
 export const hackableJsonSchema = Joi.object().keys({

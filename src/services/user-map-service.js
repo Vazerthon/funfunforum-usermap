@@ -37,9 +37,9 @@ export const initMap = (hostId) => {
   userMap.addLayer(tiles);
 };
 
-export const addMapMarker = ({ username, lat, lng, caption }) => {
+export const addMapMarker = ({ username, lat, lng, caption, hideProfilePicture }) => {
   const mark = marker([lat, lng], {
-    icon: username ? userIcon(username) : defaultIcon,
+    icon: (username && hideProfilePicture !== false) ? userIcon(username) : defaultIcon,
   }).addTo(userMap);
   mark.bindPopup(caption);
 };
