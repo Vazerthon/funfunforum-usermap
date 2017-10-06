@@ -37,6 +37,12 @@ body {
   visibility: visible;
 }
 
+.leaflet-popup-content-wrapper {
+  display: flex;
+  background: #ccc;
+  flex-direction: row;
+}
+
 .leaflet-popup-content {
   text-align: center;
 }
@@ -60,4 +66,34 @@ body {
   width: 60%;
   height: 50%;
   border-radius: 50%;
+}
+
+.profiles-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.profile-container {
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 4px;
+  margin: 4px;
+}
+
+.profile-image {
+  border-radius: 50%;
+  align-self: center;
+  width: 50px;
+  height: 50px;
+}
+
+.profile-link {
+  margin: 4px;
+}
+
+.profile-caption {
+  margin: 4px;
 }

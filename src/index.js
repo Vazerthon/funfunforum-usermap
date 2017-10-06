@@ -1,68 +1,87 @@
 import './styles.css';
-import {
-  initMap,
-  addMapMarker,
-  fetchForumData,
-  extractUserLocations,
-  showToast,
-} from './services/';
+import { initMap, addMapMarker, fetchForumData, showToast } from './services/';
 
 initMap('map-host');
 
-const htmlCaption = (username, caption) => `
-  <a href="https://www.funfunforum.com/u/${username}/">${username}</a>
-  <p>${caption}</p>
+const htmlCaption = (username, caption, profileUrl, profilePicture) => `
+  <div class="profile-container">
+    <a class="profile-link" href="${profileUrl}">${username}</a>
+    <img class="profile-image" src="${profilePicture}" />
+    <span class="profile-caption">${caption}</span>
+  </div>
 `;
 
-const combineDuplicateCoords = (location, index, locations) => ({
-  coords: { lat: location.lat, lng: location.lng },
-  users: locations.filter(l => l.lat === location.lat && l.lng === location.lng),
+const combineDuplicateCoords = (user, index, users) => ({
+  coords: { lat: user.lat, lng: user.lng },
+  users: users.filter(l => l.lat === user.lat && l.lng === user.lng),
 });
 
-const addCaptions = location => ({
-  ...location,
-  captions: location.users.map(u => htmlCaption(u.username, u.caption)),
+const addCaptions = user => ({
+  ...user,
+  captions: user.users.map(u =>
+    htmlCaption(u.username, u.caption, u.profileUrl, u.profilePicture),
+  ),
 });
 
 const combineCaptions = multiUserLocation => ({
   ...multiUserLocation,
-  caption: multiUserLocation.captions.reduce((p, c) => `${p}${p ? '<hr />' : ''}${c}`, ''),
+  caption: `
+    <div class="profiles-container">
+      ${multiUserLocation.captions.reduce(
+        (p, c) => `${p}${p ? '' : ''}${c}`,
+        '',
+      )}
+    </div>
+  `,
 });
 
-const setUsername = location => ({
+const setUsernameAndPictureUrl = location => ({
   ...location,
   username: location.users.length > 1 ? null : location.users[0].username,
+  profilePicture:
+    location.users.length > 1 ? null : location.users[0].profilePicture,
+});
+
+const toFlatObject = apiResult => ({
+  ...apiResult.hackableJson.usermapLocation,
+  profilePicture: apiResult.profilePicture,
+  profileUrl: apiResult.profileUrl,
+  username: apiResult.username,
+  error: apiResult.hackableJson.error,
 });
 
 const addUserMarkers = async () => {
-  const forumDataResult = await fetchForumData();
-  if (!forumDataResult.ok) {
-    showToast(`Problem loading forum data: ${forumDataResult.statusText}`);
+  let forumDataResult;
+  try {
+    forumDataResult = await fetchForumData();
+  } catch (error) {
+    showToast(`Problem loading forum data: ${error.message}`);
     return;
   }
-  const forumData = await forumDataResult.json();
-  if (!Array.isArray(forumData)) {
+
+  const users = await forumDataResult.data.data.users;
+  if (!Array.isArray(users)) {
     showToast('Problem loading forum data: expected an array');
     return;
   }
-  const userLocationData = extractUserLocations(forumData);
-  userLocationData
+
+  users
+    .map(toFlatObject)
     .map(combineDuplicateCoords)
     .map(addCaptions)
     .map(combineCaptions)
-    .map(setUsername)
+    .map(setUsernameAndPictureUrl)
     .map(l =>
       addMapMarker({
         lat: l.coords.lat,
         lng: l.coords.lng,
         username: l.username,
         caption: l.caption,
+        profilePicture: l.profilePicture,
       }),
     );
 
-  showToast(
-    `Loaded forum data for ${forumData.length} users, ${userLocationData.length} of them have a location set`,
-  );
+  showToast(`Loaded forum data for ${users.length} users`);
 };
 
 addUserMarkers();
