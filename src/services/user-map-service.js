@@ -27,7 +27,7 @@ const userIcon = profilePicture =>
 export const initMap = hostId => {
   userMap = map(hostId, { worldCopyJump: true });
 
-  const tiles = tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+  const tiles = tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution:
       '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
     minZoom: 2,
